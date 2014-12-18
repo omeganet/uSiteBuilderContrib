@@ -9,8 +9,22 @@ namespace USiteBuilderContrib.TypeConverters
     /// <summary>
     /// Converts the output from a content picker to an IPublishedContent model
     /// </summary>
-    public class ContentPickerAsIPublishedContentConvertor : ICustomTypeConvertor
+    public class ContentPickerToIPublishedContentConvertor : ICustomTypeConvertor
     {
+        private readonly UmbracoContext _umbracoContext;
+
+        public ContentPickerToIPublishedContentConvertor()
+            : this(UmbracoContext.Current)
+        {
+        }
+
+        public ContentPickerToIPublishedContentConvertor(UmbracoContext umbracoContext)
+        {
+            if (umbracoContext == null)
+                throw new ArgumentNullException();
+            _umbracoContext = umbracoContext;
+        }
+
         public Type ConvertType
         {
             get
@@ -26,15 +40,13 @@ namespace USiteBuilderContrib.TypeConverters
             if (inputValue == null)
                 return null;
 
-            string nodeIdStr = inputValue.ToString();
-            return string.IsNullOrEmpty(nodeIdStr) ? null : UmbracoContext.Current.ContentCache.GetById(int.Parse(nodeIdStr));
+            int nodeId;
+            return Int32.TryParse(inputValue.ToString(), out nodeId) ? 
+                _umbracoContext.ContentCache.GetById(nodeId) : null;
         }
 
         public object ConvertValueWhenWrite(object inputValue)
         {
-            if (inputValue == null)
-                return null;
-
             var content = inputValue as IPublishedContent;
             return content != null ? content.Id.ToString(CultureInfo.InvariantCulture) : inputValue;
         }

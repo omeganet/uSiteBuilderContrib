@@ -52,10 +52,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TypeConverters\MediaPickerAsIPublishedContentConvertor.cs" />
-    <Compile Include="TypeConverters\ContentPickerAsIPublishedContentConvertor.cs" />
-    <Compile Include="TypeConverters\MemberPickerAsMemberTypeBaseTypeConvertor.cs" />
-    <Compile Include="TypeConverters\ContentPickerAsDocumentTypeBaseTypeConvertor.cs" />
+    <Compile Include="TypeConverters\MediaPickerToIPublishedContentConvertor.cs" />
+    <Compile Include="TypeConverters\ContentPickerToIPublishedContentConvertor.cs" />
+    <Compile Include="TypeConverters\MemberPickerToMemberTypeConvertor.cs" />
+    <Compile Include="TypeConverters\MemberPickerToMemberTypeBaseTypeConvertor.cs" />
+    <Compile Include="TypeConverters\ContentPickerToDocumentTypeBaseTypeConvertor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
