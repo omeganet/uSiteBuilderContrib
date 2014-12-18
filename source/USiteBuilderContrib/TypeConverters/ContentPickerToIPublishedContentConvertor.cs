@@ -11,18 +11,18 @@ namespace USiteBuilderContrib.TypeConverters
     /// </summary>
     public class ContentPickerToIPublishedContentConvertor : ICustomTypeConvertor
     {
-        private readonly UmbracoContext _umbracoContext;
+        private readonly Func<UmbracoContext> _getUmbracoContext;
 
         public ContentPickerToIPublishedContentConvertor()
-            : this(UmbracoContext.Current)
+            : this(() => UmbracoContext.Current)
         {
         }
 
-        public ContentPickerToIPublishedContentConvertor(UmbracoContext umbracoContext)
+        public ContentPickerToIPublishedContentConvertor(Func<UmbracoContext> getUmbracoContext)
         {
-            if (umbracoContext == null)
+            if (getUmbracoContext == null)
                 throw new ArgumentNullException();
-            _umbracoContext = umbracoContext;
+            _getUmbracoContext = getUmbracoContext;
         }
 
         public Type ConvertType
@@ -41,8 +41,8 @@ namespace USiteBuilderContrib.TypeConverters
                 return null;
 
             int nodeId;
-            return Int32.TryParse(inputValue.ToString(), out nodeId) ? 
-                _umbracoContext.ContentCache.GetById(nodeId) : null;
+            return Int32.TryParse(inputValue.ToString(), out nodeId) ?
+                _getUmbracoContext().ContentCache.GetById(nodeId) : null;
         }
 
         public object ConvertValueWhenWrite(object inputValue)
