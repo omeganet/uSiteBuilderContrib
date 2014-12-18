@@ -10,6 +10,14 @@ namespace USiteBuilderContrib.TypeConverters
     /// </summary>
     public class ContentPickerToDocumentTypeBaseTypeConvertor : ContentPickerToDocumentTypeBaseTypeConvertor<DocumentTypeBase>
     {
+        public ContentPickerToDocumentTypeBaseTypeConvertor()
+        {
+        }
+
+        public ContentPickerToDocumentTypeBaseTypeConvertor(DocumentTypeResolver resolver)
+            : base(resolver)
+        {
+        }
     }
 
     /// <summary>
@@ -44,7 +52,7 @@ namespace USiteBuilderContrib.TypeConverters
                 return null;
 
             int nodeId;
-            return Int32.TryParse(inputValue.ToString(), out nodeId) ? 
+            return Int32.TryParse(inputValue.ToString(), out nodeId) ?
                 _resolver.GetTyped<TDocumentType>(nodeId) : null;
         }
 
