@@ -58,6 +58,8 @@
     <Compile Include="TypeConverters\MemberPickerToMemberTypeBaseTypeConvertor.cs" />
     <Compile Include="TypeConverters\ContentPickerToDocumentTypeBaseTypeConvertor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\Activation\TypeConverterCachedActivator.cs" />
+    <Compile Include="Types\Activation\CachedActivator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
